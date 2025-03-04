@@ -1,9 +1,6 @@
+import { FirestoreService } from './../../../common/services/firestore.service';
 import { UserService } from './../../../common/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-
-
- import { FirestoreService } from '../../../common/services/firestore.service';
-
 import { UserI } from 'src/app/common/models/users.models';
 import { OverlayEventDetail } from '@ionic/core';
 import { NgModule } from '@angular/core';
@@ -29,8 +26,8 @@ export class UsuariosPage implements OnInit {
 
  usuarios: UserI[] = [];
    usuariosPendientes: any[] = [];
-
-
+ dniInput: string = '';
+ nombreInput: string = '';
 
   constructor(
     private firestoreService: FirestoreService,
@@ -66,7 +63,7 @@ async cargarUsuariosPendientes() {
 }
 
  async eliminarUsuario(usuario: UserI) {
-  const confirmacion = window.confirm(`¿Estás seguro de que quieres eliminar al usuario "${usuario.nombre}"? Esta acción no se puede deshacer.`);
+  const confirmacion = window.confirm(`¿Estás seguro de que quieres eliminar al usuario ? Esta acción no se puede deshacer.`);
   if (!confirmacion) return;
 
   console.log('Eliminando usuario:', usuario);
@@ -122,7 +119,19 @@ async aprobarUsuario(usuario: any) {
   }
 }
 
-
+ // Método para agregar un usuario por DNI
+  async agregarUsuarioPorDni(dni: string , nombre:string) {
+    try {
+      // Aquí puedes agregar la lógica para crear un nuevo usuario usando el DNI
+      const nuevoUsuario = await this.firestoreService.addUsuarioConDNI(dni, nombre);
+      this.usuarios.push(nuevoUsuario); // Agregar el nuevo usuario a la lista
+      console.log('Usuario agregado:', nuevoUsuario);
+      window.alert('Usuario agregado con éxito.');
+    } catch (error) {
+      console.error('Error agregando el usuario por DNI:', error);
+      window.alert('Error al agregar el usuario. Por favor, inténtalo de nuevo.');
+    }
+  }
 
 
 }

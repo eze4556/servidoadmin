@@ -112,7 +112,7 @@ async approveUser(userId: string): Promise<void> {
       const user = userData.data() as UserI;
 
       // Agregar el campo `approved` en el documento del usuario
-      user.approved = true;
+      // user.approved = true;
 
       // Mover el usuario a la colección 'users'
       await this.usersCollection.doc(userId).set(user);

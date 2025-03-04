@@ -527,6 +527,31 @@ async getEtiquetas(): Promise<string[]> {
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Marca[];
   }
 
+// Agregar un nuevo usuario con solo el DNI
+async addUsuarioConDNI(dni: string, nombre:string): Promise<UserI> {
+  try {
+    // Generar un ID único para el usuario
+    const id = uuidv4();
+
+    // Crear el documento con el DNI
+    const docRef = doc(this.firestore, `usuarios/${id}`);
+
+    // Definir el objeto con los datos mínimos (solo el DNI)
+    const user: UserI = {
+      id,
+      dni,
+      nombre
+    };
+
+    // Guardar el usuario en Firestore
+    await setDoc(docRef, user);
+    console.log(`Usuario añadido con id: ${id}`);
+    return user;
+  } catch (error) {
+    console.error('Error añadiendo el usuario:', error);
+    throw error;
+  }
+}
 
 }
 
