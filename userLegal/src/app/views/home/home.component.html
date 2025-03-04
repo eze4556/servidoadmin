@@ -1,14 +1,14 @@
 <ion-app>
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title   >Administrador de Servido</ion-title>
+      <ion-title   >Administrador de Agrofono</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="ion-padding">
 
     <div class="welcome-section">
-      <h2>¡Bienvenido al administrador de Servido!</h2>
+      <h2>¡Bienvenido al administrador de Agrofono!</h2>
       <div *ngIf="clima" class="weather-info">
         <img [src]="clima.current.condition.icon" alt="Icono del clima">
         <p>
@@ -27,13 +27,13 @@
 
     <ion-button expand="full" routerLink="/categoria">
   <ion-icon name="grid-outline" slot="start"></ion-icon>
-  Categorias
+  COMPUTADORAS
 </ion-button>
 
-<ion-button expand="full" routerLink="/marcas">
+<!-- <ion-button expand="full" routerLink="/marcas">
   <ion-icon name="pricetags-outline" slot="start"></ion-icon>
   Marca
-</ion-button>
+</ion-button> -->
 
 
 
